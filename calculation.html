@@ -41,7 +41,7 @@
 </head>
 <body>
     <header>
-	<div class="logo">
+        <div class="logo">
             <img src="logo.jpg" alt="Culinary Institute Logo">
         </div>
         <h1>Welcome to Culinary Institute</h1>
@@ -60,7 +60,7 @@
         <div class="scroll-left">
             <p>Welcome to Culinary Institute </p>
         </div>
- 		<section>
+        <section>
             <h2>Ingredients</h2>
             <form id="calculator-form">
                 <label for="ingredient">Ingredient:</label>
@@ -79,13 +79,33 @@
             </ul>
             <p>Total Calories: <span id="total-calories">0</span></p>
         </section>
-
-     
     </main>
-	 <script src="scripts.js"></script>
     <footer>
         <p>&copy; 2024 Culinary Institute. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        document.getElementById('calculator-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            
+            // Get values from form inputs
+            var ingredient = document.getElementById('ingredient').value;
+            var calories = parseFloat(document.getElementById('calories').value);
+            var servingSize = parseFloat(document.getElementById('serving-size').value);
+            
+            // Calculate total calories
+            var totalCalories = calories * servingSize;
+
+            // Display the ingredient and calculated calories
+            var caloriesList = document.getElementById('calories-list');
+            var listItem = document.createElement('li');
+            listItem.textContent = ingredient + ': ' + totalCalories + ' calories';
+            caloriesList.appendChild(listItem);
+
+            // Update total calories
+            var currentTotalCalories = parseFloat(document.getElementById('total-calories').textContent);
+            document.getElementById('total-calories').textContent = currentTotalCalories + totalCalories;
+        });
+    </script>
 </body>
 </html>
